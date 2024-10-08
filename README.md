@@ -29,7 +29,7 @@
 
 Прикрепите в файл README.md скриншот авторизации в админке.
 
-![zabbix] ([img/Zabbix UI.jpg](https://github.com/Victor3359995/gitlab-hw1/blob/481b0cfa1bd2724f47ff4f5bd752bb030eb8d8ae/img/Zabbix UI.jpg)) 
+![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/a8fc840e15ef2285ca81cd9b9672b04806933760/img/zabbix_agent_log.jpg) 
 
 
 Задание 2
