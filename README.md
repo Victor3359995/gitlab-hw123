@@ -28,7 +28,7 @@
 
 
 Прикрепите в файл README.md скриншот авторизации в админке.
-![zabbix](img/Zabbix UI.jpg)
+![zabbix](/img/Zabbix UI.jpg)
 
 
 Задание 2
