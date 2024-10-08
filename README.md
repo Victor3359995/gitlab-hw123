@@ -36,13 +36,19 @@
 Установите Zabbix Agent на два хоста.
 
 Приложите в файл README.md скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу
-![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/Zabbix%20hosts.jpg)
+
+![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/Zabbix%20hosts.jpg)
 Приложите в файл README.md скриншот лога zabbix agent, где видно, что он работает с сервером
-![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/systemctl%20status.jpg)
-![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/zabbix_agent_log.jpg)
-![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/systemctl%20status%20is%20woking%20again.jpg)
+
+![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/systemctl%20status.jpg)
+
+![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/zabbix_agent_log.jpg)
+
+![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/systemctl%20status%20is%20woking%20again.jpg)
+
 Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
-![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/Latest%20data.jpg)
+
+![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/Latest%20data.jpg)
 
 
 
