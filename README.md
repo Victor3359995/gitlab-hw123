@@ -30,44 +30,23 @@
 Прикрепите в файл README.md скриншот авторизации в админке.
 
 ![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/Zabbix%20%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F.jpg) 
-
-
-Задание 2
-Установите Zabbix Agent на два хоста.
-
-Процесс выполнения
-Выполняя ДЗ, сверяйтесь с процессом отражённым в записи лекции.
-Установите Zabbix Agent на 2 вирт.машины, одной из них может быть ваш Zabbix Server.
-Добавьте Zabbix Server в список разрешенных серверов ваших Zabbix Agentов.
-Добавьте Zabbix Agentов в раздел Configuration > Hosts вашего Zabbix Servera.
-Проверьте, что в разделе Latest Data начали появляться данные с добавленных агентов.
-Требования к результаты
-Приложите в файл README.md скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу
-Приложите в файл README.md скриншот лога zabbix agent, где видно, что он работает с сервером
-Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
-Приложите в файл README.md текст использованных команд в GitHub
-
-
-![Jenkins](img/jenkins_project.png)
-
-
-
-
+![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/Zabbix%20UI.jpg)
 
 ### Задание 2
+Установите Zabbix Agent на два хоста.
+
+Приложите в файл README.md скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу
+![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/Zabbix%20hosts.jpg)
+Приложите в файл README.md скриншот лога zabbix agent, где видно, что он работает с сервером
+![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/systemctl%20status.jpg)
+![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/zabbix_agent_log.jpg)
+![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/systemctl%20status%20is%20woking%20again.jpg)
+Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
+![zabbix] (https://github.com/Victor3359995/gitlab-hw1/blob/main/img/Latest%20data.jpg)
 
 
 
 
-![Jenkins declarative](img/jenkins_project3.png)
 
-
-### Задание 3
-
-
-
-![Jenkins and Nexus declarative](img/jenkins_nexus1.png)
-
-![Jenkins and Nexus declarative](img/jenkins_nexus2.png)
 
 
