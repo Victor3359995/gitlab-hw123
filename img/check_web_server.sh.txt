@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SERVER_IP="127.0.0.1"
+SERVER_PORT=80
+INDEX_FILE="/var/www/html/index.html"
+
+nc -z "$SERVER_IP" "$SERVER_PORT"
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+if [ ! -f "$INDEX_FILE" ]; then
+    exit 1
+fi
+
+exit 0
