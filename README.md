@@ -21,57 +21,64 @@
 1. [Руководство по оформлению Markdown файлов](https://gist.github.com/Jekins/2bf2d0638163f1294637#Code)
 
 ---
+### Задание 1
 
 
 
+![Packer tarcer](img/hsrp.png)
 
 
-###Задание 1
-Создайте свой шаблон, в котором будут элементы данных, мониторящие загрузку CPU и RAM хоста.
+### Задание 2
+![keepalived](img/keepalived.png)
+![keepalived stoped](img/keepalived_stoped.png)
 
-Процесс выполнения
-Выполняя ДЗ сверяйтесь с процессом отражённым в записи лекции.
-В веб-интерфейсе Zabbix Servera в разделе Templates создайте новый шаблон
-Создайте Item который будет собирать информацию об загрузке CPU в процентах
-Создайте Item который будет собирать информацию об загрузке RAM в процентах
-Требования к результату
- Прикрепите в файл README.md скриншот страницы шаблона с названием «Задание 1»
-![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/1.jpg)
- 
-###Задание 2
-Добавьте в Zabbix два хоста и задайте им имена <фамилия и инициалы-1> и <фамилия и инициалы-2>. Например: ivanovii-1 и ivanovii-2.
+keepalived.conf
 
-Процесс выполнения
-Выполняя ДЗ сверяйтесь с процессом отражённым в записи лекции.
-Установите Zabbix Agent на 2 виртмашины, одной из них может быть ваш Zabbix Server
-Добавьте Zabbix Server в список разрешенных серверов ваших Zabbix Agentов
-Добавьте Zabbix Agentов в раздел Configuration > Hosts вашего Zabbix Servera
-Прикрепите за каждым хостом шаблон Linux by Zabbix Agent
-Проверьте что в разделе Latest Data начали появляться данные с добавленных агентов
-Требования к результату
- Результат данного задания сдавайте вместе с заданием 3
-###Задание 3
-Привяжите созданный шаблон к двум хостам. Также привяжите к обоим хостам шаблон Linux by Zabbix Agent.
+```
+vrrp_script chk_web_server {
+    script "/usr/local/bin/check_web_server.sh"
+    interval 3
+    fall 2
+    rise 2
+}
 
-Процесс выполнения
-Выполняя ДЗ сверяйтесь с процессом отражённым в записи лекции.
-Зайдите в настройки каждого хоста и в разделе Templates прикрепите к этому хосту ваш шаблон
-Так же к каждому хосту привяжите шаблон Linux by Zabbix Agent
-Проверьте что в раздел Latest Data начали поступать необходимые данные из вашего шаблона
-Требования к результату
- Прикрепите в файл README.md скриншот страницы хостов, где будут видны привязки шаблонов с названиями «Задание 2-3». Хосты должны иметь зелёный статус подключения
- ![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/2.jpg)
- ![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/2_1.jpg)
- ![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/3.jpg)
-###Задание 4
-Создайте свой кастомный дашборд.
+vrrp_instance VI_1 {
+    state MASTER
+    interface enp0s3                
+    virtual_router_id 51           
+    priority 100                   
+    advert_int 1
 
-Процесс выполнения
-Выполняя ДЗ сверяйтесь с процессом отражённым в записи лекции.
-В разделе Dashboards создайте новый дашборд
-Разместите на нём несколько графиков на ваше усмотрение.
-Требования к результату
- Прикрепите в файл README.md скриншот дашборда с названием «Задание 4»
-![zabbix](https://github.com/Victor3359995/gitlab-hw1/blob/main/img/4.jpg)
+    virtual_ipaddress {
+        192.168.1.100              
+    }
+
+    track_script {
+        chk_web_server
+    }
+}
+```
+
+check_web_server.sh
+
+```
+#!/bin/bash
+
+SERVER_IP="127.0.0.1"
+SERVER_PORT=80
+INDEX_FILE="/var/www/html/index.html"
+
+nc -z "$SERVER_IP" "$SERVER_PORT"
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+if [ ! -f "$INDEX_FILE" ]; then
+    exit 1
+fi
+
+exit 0
+
+```
 
 
