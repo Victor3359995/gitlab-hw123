@@ -30,7 +30,8 @@
 
 ### Задание 2
 ![keepalived](img/keepalived.png)
-![keepalived stoped](img/keepalived_stoped.png)
+![keepalived stoped](img/keepalived_stoped_1.png)
+![keepalived stoped](img/keepalived_stoped_2.png)
 
 keepalived.conf
 
