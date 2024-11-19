@@ -23,63 +23,71 @@
 ---
 ### Задание 1
 
+![Haproxy1](img/haproxy1.png)
 
+То что добавил к стандартному haproxy.cfg:
 
-![Packer tarcer](img/hsrp.png)
+```
+
+frontend http_front
+    bind *:80
+    default_backend servers
+
+backend servers
+    balance roundrobin
+    server server1 127.0.0.1:8001 check
+    server server2 127.0.0.1:8002 check
+
+```
 
 
 ### Задание 2
-![keepalived](img/keepalived.png)
-![keepalived stoped](img/keepalived_stoped_1.png)
-![keepalived stoped](img/keepalived_stoped_2.png)
 
-keepalived.conf
+![Haproxy2](img/haproxy2.png)
 
-```
-vrrp_script chk_web_server {
-    script "/usr/local/bin/check_web_server.sh"
-    interval 3
-    fall 2
-    rise 2
-}
-
-vrrp_instance VI_1 {
-    state MASTER
-    interface enp0s3                
-    virtual_router_id 51           
-    priority 100                   
-    advert_int 1
-
-    virtual_ipaddress {
-        192.168.1.100              
-    }
-
-    track_script {
-        chk_web_server
-    }
-}
-```
-
-check_web_server.sh
+haproxy.cfg:
 
 ```
-#!/bin/bash
+global
+    log /dev/log local0
+    log /dev/log local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+    maxconn 256
 
-SERVER_IP="127.0.0.1"
-SERVER_PORT=80
-INDEX_FILE="/var/www/html/index.html"
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5s
+    timeout client  50s
+    timeout server  50s
+    retries 3
 
-nc -z "$SERVER_IP" "$SERVER_PORT"
-if [ $? -ne 0 ]; then
-    exit 1
-fi
+frontend http_in
+    bind *:80
+    acl host_example hdr(host) -i example.local
+    use_backend http_back if host_example
+    default_backend http_default
 
-if [ ! -f "$INDEX_FILE" ]; then
-    exit 1
-fi
+backend http_back
+    mode http
+    balance roundrobin
+    option httpchk GET /
+    server server1 127.0.0.1:8001 weight 2 check
+    server server2 127.0.0.1:8002 weight 3 check
+    server server3 127.0.0.1:8003 weight 4 check
 
-exit 0
+backend http_default
+    mode http
+    errorfile 503 /etc/haproxy/errors/503.http
 
 ```
+
 
 
