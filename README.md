@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "«Кластеризация и балансировка нагрузки»" - `Важинский`
+# Домашнее задание к занятию "`Резервное копирование`" - `Важинский`
 -- 
 
 ### Инструкция по выполнению домашнего задания
@@ -23,71 +23,47 @@
 ---
 ### Задание 1
 
-![Haproxy1](img/haproxy1.png)
 
-То что добавил к стандартному haproxy.cfg:
+
+![rsync](img/1.png)
+
+```
+rsync -aHAXv --delete --checksum --exclude '.*' /home/alexander/ /tmp/backup/
 
 ```
 
-frontend http_front
-    bind *:80
-    default_backend servers
-
-backend servers
-    balance roundrobin
-    server server1 127.0.0.1:8001 check
-    server server2 127.0.0.1:8002 check
-
-```
 
 
 ### Задание 2
 
-![Haproxy2](img/haproxy2.png)
+![rsync](img/2.png)
 
-haproxy.cfg:
+backup.sh
 
 ```
-global
-    log /dev/log local0
-    log /dev/log local1 notice
-    chroot /var/lib/haproxy
-    stats socket /run/haproxy/admin.sock mode 660 level admin
-    stats timeout 30s
-    user haproxy
-    group haproxy
-    daemon
-    maxconn 256
+#!/bin/bash
 
-defaults
-    log     global
-    mode    http
-    option  httplog
-    option  dontlognull
-    timeout connect 5s
-    timeout client  50s
-    timeout server  50s
-    retries 3
 
-frontend http_in
-    bind *:80
-    acl host_example hdr(host) -i example.local
-    use_backend http_back if host_example
-    default_backend http_default
+LOGFILE="/var/log/backup.log"
 
-backend http_back
-    mode http
-    balance roundrobin
-    option httpchk GET /
-    server server1 127.0.0.1:8001 weight 2 check
-    server server2 127.0.0.1:8002 weight 3 check
-    server server3 127.0.0.1:8003 weight 4 check
 
-backend http_default
-    mode http
-    errorfile 503 /etc/haproxy/errors/503.http
+SOURCE="/home/alexander/"
+DESTINATION="/tmp/backup/"
+
+
+rsync -aHAXv --delete --checksum --exclude '.*' "$SOURCE" "$DESTINATION" &>> "$LOGFILE"
+
+if [ $? -eq 0 ]; then
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Backuped successfully." >> "$LOGFILE"
+else
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Backup failed." >> "$LOGFILE"
+fi
 
 ```
 
+cron.tab
 
+```
+0 3 * * * /home/username/backup.sh
 
+```
