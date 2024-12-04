@@ -30,7 +30,7 @@
 
 *Итогом выполнения домашнего задания будет приложенный скриншот веб-интерфейса RabbitMQ.*
 
-![Interface](./img/interface.jpg)
+![Interface](./img/interface1.jpg)
 
 ---
 
