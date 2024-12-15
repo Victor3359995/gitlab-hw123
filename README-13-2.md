@@ -29,7 +29,7 @@ sudo ecryptfs-migrate-home -u cryptouser
 
 Проверка домашнего каталога пользователя cryptouser с исходными и зашифрованными данными:
 
-![cry](./img/cry4.png)
+![cry](./img/cry4_1.png)
 
 ### Задание 2
 
