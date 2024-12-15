@@ -26,7 +26,7 @@
 Установка Kali Linux.
 Установка, запуск, выполнение входа и проверка сетевого адреса ВМ Metasploitable2:
 
-![sec](./img/sec1.png)
+![sec](./img/sec11.png)
 
 Сканирование ВМ Metasploitable2 с использованием **nmap**:
 
